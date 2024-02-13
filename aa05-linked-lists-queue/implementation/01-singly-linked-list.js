@@ -13,61 +13,81 @@ class SinglyLinkedList {
   }
 
   addToHead(val) {
-    
+    let node = new SinglyLinkedNode(val);
+
+    node.next = this.head;
+    this.head = node;
+    this.length++;
+
+    return this;
   }
 
   addToTail(val) {
-    // There are bugs in this method! Fix them!!!
+    let node = new SinglyLinkedNode(val);
+    this.length++;
 
-    // Add node of val to tail of linked list
-    let newNode = new SinglyLinkedNode(data);
-
-    if (!head) {
-      head = newNode;
-      return head;
+    if (!this.head) {
+      this.head = node;
+      return this;
     }
 
-    let curr = head;
-    while (curr) {
-      curr = current.next;
+    let curr = this.head;
+
+    while (curr.next) {
+      curr = curr.next;
     }
-    curr.next = newNode;
 
-    return head;
+    curr.next = node;
 
-    // Write your hypothesis on the time complexity of this method here
+    return this;
   }
 
   removeFromHead() {
-    // Remove node at head
+    if (!this.head) return;
+    let head = this.head;
 
-    // Your code here 
+    if (this.length == 1) {
+      this.head = null;
+    } else {
+      this.head = this.head.next;
+    }
 
-    // Write your hypothesis on the time complexity of this method here
+    this.length--;
+    return head;
   }
 
   removeFromTail() {
-    // Remove node at tail
+    if (!this.head) return;
+    let curr = this.head;
+    if (this.length === 1) {
+      this.head = null;
+      this.length--;
+      return curr;
+    }
 
-    // Your code here 
+    while (curr.next.next) {
+      curr = curr.next;
+    }
 
-    // Write your hypothesis on the time complexity of this method here
+    let tail = curr.next;
+    curr.next = null;
+    
+    this.length--;
+    return tail;
   }
 
   peekAtHead() {
-    // Return the value of head node
-
-    // Your code here 
-
-    // Write your hypothesis on the time complexity of this method here
+    if (!this.head) return;
+    return this.head.value;
   }
 
   print() {
-    // Print out the linked list
-
-    // Your code here 
-
-    // Write your hypothesis on the time complexity of this method here
+    if (!this.length) return;
+    let curr = this.head;
+    while (curr) {
+      console.log(curr.value);
+      curr = curr.next;
+    }
   }
 }
 
